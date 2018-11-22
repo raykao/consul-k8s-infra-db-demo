@@ -41,3 +41,21 @@ variable "vnet_space" {
 variable "vnet_prefix" {
   default = "16"
 }
+
+variable "scale_set_name" {
+  default="null"
+}
+variable "subscription_id" {
+  default="null"
+}
+variable "tenant_id" {
+  default="null"
+}
+variable "client_id" {
+  default="null"
+}
+variable "secret_access_key" {
+  default="null"
+}
+
+

@@ -68,7 +68,7 @@ resource "azurerm_virtual_machine" "main" {
   os_profile {
     computer_name  = "${var.prefix}${format("%03d", count.index+1)}"
     admin_username = "${var.admin_username}"
-    custom_data	   = "${data.template_file.consul_config}"
+    custom_data	   = "${data.template_file.consul_config.rendered}"
   }
   os_profile_linux_config {
     disable_password_authentication = true
@@ -85,7 +85,7 @@ data "template_file" "consul_config" {
   vars {
     consul_encrpyt = "${var.consul_encrypt}"
     consul_datacenter = "${var.location}"
-    scale_set_name = "${var.cluster_name}-server"
+    scale_set_name = "${var.scale_set_name}-server"
     subscription_id = "${var.subscription_id}"
     tenant_id = "${var.tenant_id}"
     client_id = "${var.client_id}"

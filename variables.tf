@@ -8,6 +8,10 @@ variable "consul_encrypt" {
   default="oGKwo6QPhN7Kq2gENftlAw=="
 }
 
+variable "consul_version" {
+  default="1.4.0"
+}
+
 
 variable "instance_count" {
   default = 3

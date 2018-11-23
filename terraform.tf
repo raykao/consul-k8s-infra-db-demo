@@ -83,12 +83,13 @@ data "template_file" "consul_config" {
   template = "${file("${path.root}/install_consul.sh")}"
 
   vars {
-    consul_encrpyt = "${var.consul_encrypt}"
+    consul_encrpyt    = "${var.consul_encrypt}"
     consul_datacenter = "${var.location}"
-    scale_set_name = "${var.scale_set_name}-server"
-    subscription_id = "${var.subscription_id}"
-    tenant_id = "${var.tenant_id}"
-    client_id = "${var.client_id}"
+    consul_version	  = "${var.consul_version}"
+    scale_set_name    = "${var.scale_set_name}-server"
+    subscription_id   = "${var.subscription_id}"
+    tenant_id         = "${var.tenant_id}"
+    client_id         = "${var.client_id}"
     secret_access_key = "${var.secret_access_key}"
   }
 }

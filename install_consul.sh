@@ -5,6 +5,9 @@
 # Used for setting up Consul Server inter-node encrpyted settings
 CONSUL_ENCRYPT="${consul_encrpyt}"
 CONSUL_DATACENTER="${consul_datacenter}"
+CONSUL_DOWNLOAD_PATH="/tmp/consul_${consul_version}_linux_amd64.zip"
+CONSUL_DOWNLOAD_URL="https://releases.hashicorp.com/consul/${consul_version}/$CONSUL_DOWNLOAD_FILE"
+
 
 # Used for getting cluster IP addresses for Consul bootstrapping/join
 AZURE_SCALE_SET_NAME="${scale_set_name}"
@@ -17,15 +20,13 @@ apt update
 
 apt install -y unzip jq
 
-cd /tmp
+wget -P /tmp "$CONSUL_DOWNLOAD_URL"
 
-wget https://releases.hashicorp.com/consul/1.4.0/consul_1.4.0_linux_amd64.zip
+unzip -d /tmp "$CONSUL_DOWNLOAD_PATH"
 
-unzip consul_1.4.0_linux_amd64.zip
+chown root:root /tmp/consul
 
-chown root:root consul
-
-mv consul /usr/local/bin/
+mv /tmp/consul /usr/local/bin/
 
 consul -autocomplete-install
 complete -C /usr/local/bin/consul consul

@@ -74,8 +74,12 @@ resource "azurerm_virtual_machine" "main" {
     disable_password_authentication = true
     ssh_keys {
       path     = "/home/${var.admin_username}/.ssh/authorized_keys"
-      key_data = "${var.admin_sshkey}"
+      key_data = "${file("~/.ssh/id_rsa.pub")}"
     }
+  }
+  tags {
+    consul = "server"
+    environment ="testing"
   }
 }
 

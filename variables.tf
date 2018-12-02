@@ -1,5 +1,3 @@
-variable "admin_sshkey" {}
-
 variable "admin_username" {
   default	= "consuldemo"
 }

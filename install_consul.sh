@@ -6,7 +6,7 @@
 CONSUL_ENCRYPT="${consul_encrpyt}"
 CONSUL_DATACENTER="${consul_datacenter}"
 CONSUL_DOWNLOAD_PATH="/tmp/consul_${consul_version}_linux_amd64.zip"
-CONSUL_DOWNLOAD_URL="https://releases.hashicorp.com/consul/${consul_version}/$CONSUL_DOWNLOAD_FILE"
+CONSUL_DOWNLOAD_URL="https://releases.hashicorp.com/consul/${consul_version}/consul_${consul_version}_linux_amd64.zip"
 
 
 # Used for getting cluster IP addresses for Consul bootstrapping/join
@@ -67,4 +67,22 @@ cat >/etc/consul.d/consul.hcl <<EOF
 datacenter = "dc1"
 data_dir = "/opt/consul"
 encrypt = "$CONSUL_ENCRYPT"
+retry_join = ["192.168.0.4", "192.168.0.5", "192.168.0.6"]
 EOF
+
+mkdir --parents /etc/consul.d
+touch /etc/consul.d/server.hcl
+chown --recursive consul:consul /etc/consul.d
+chmod 640 /etc/consul.d/server.hcl
+
+cat >/etc/consul.d/server.hcl <<EOF
+server = true
+bootstrap_expect = 3
+ui = true
+EOF
+
+systemctl enable consul
+systemctl start consul
+systemctl status consul
+
+# consul agent -retry-join 'provider=azure config=val config2="some other val" ...'

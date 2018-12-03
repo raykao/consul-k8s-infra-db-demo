@@ -12,7 +12,7 @@ const mysqlPort = process.env.MYSQL_PORT;
 
 console.log(mysqlUser);
 
-const sequelize = new Sequelize('database', 'username', 'password', {
+const sequelize = new Sequelize({
   host: mysqlHost,
   username: mysqlUser,
   password: mysqlPassword,

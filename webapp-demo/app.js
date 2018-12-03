@@ -9,6 +9,9 @@ const mysqlHost = process.env.MYSQL_HOST;
 const mysqlUser = process.env.MYSQL_USER;
 const mysqlPassword = process.env.MYSQL_PASSWORD;
 const mysqlPort = process.env.MYSQL_PORT;
+
+console.log(mysqlUser);
+
 const sequelize = new Sequelize('database', 'username', 'password', {
   host: mysqlHost,
   username: mysqlUser,

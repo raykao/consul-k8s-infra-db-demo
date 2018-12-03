@@ -3,39 +3,43 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-// const Sequelize = require('sequelize');
+const Sequelize = require('sequelize');
 
-// const mysqlHost = process.env.MYSQL_HOST;
-// const mysqlUser = process.env.MYSQL_USER;
-// const mysqlPassword = process.env.MYSQL_PASSWORD;
-// const sequelize = new Sequelize('database', 'username', 'password', {
-//   host: mysqlHost,
-//   dialect: 'mysql',
+const mysqlHost = process.env.MYSQL_HOST;
+const mysqlUser = process.env.MYSQL_USER;
+const mysqlPassword = process.env.MYSQL_PASSWORD;
+const mysqlPort = process.env.MYSQL_PORT;
+const sequelize = new Sequelize('database', 'username', 'password', {
+  host: mysqlHost,
+  username: mysqlUser,
+  password: mysqlPassword,
+  port: mysqlPort,
+  dialect: 'mysql',
 
-//   pool: {
-//     max: 5,
-//     min: 0,
-//     acquire: 30000,
-//     idle: 10000
-//   },
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  },
 
-//   // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
-//   operatorsAliases: false
-// });
+  // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
+  operatorsAliases: false
+});
 
-// const User = sequelize.define('user', {
-//   username: Sequelize.STRING,
-//   birthday: Sequelize.DATE
-// });
+const User = sequelize.define('user', {
+  username: Sequelize.STRING,
+  birthday: Sequelize.DATE
+});
 
-// sequelize.sync()
-//   .then(() => User.create({
-//     username: 'janedoe',
-//     birthday: new Date(1980, 6, 20)
-//   }))
-//   .then(jane => {
-//     console.log(jane.toJSON());
-//   });
+sequelize.sync()
+  .then(() => User.create({
+    username: 'janedoe',
+    birthday: new Date(1980, 6, 20)
+  }))
+  .then(jane => {
+    console.log(jane.toJSON());
+  });
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');

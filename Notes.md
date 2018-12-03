@@ -9,3 +9,6 @@ Domains=~consul
 iptables -t nat -A OUTPUT -d localhost -p udp -m udp --dport 53 -j REDIRECT --to-ports 8600
 iptables -t nat -A OUTPUT -d localhost -p tcp -m tcp --dport 53 -j REDIRECT --to-ports 8600
 ```
+
+
+echo '{"service": {"name": "web", "tags": ["node"], "port": 80}}' > ./web.json

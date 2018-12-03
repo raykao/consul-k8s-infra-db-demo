@@ -6,6 +6,7 @@ const logger = require('morgan');
 const Sequelize = require('sequelize');
 
 const mysqlHost = process.env.MYSQL_HOST;
+const mysqlDatabase = process.env.MYSQL_DB;
 const mysqlUser = process.env.MYSQL_USER;
 const mysqlPassword = process.env.MYSQL_PASSWORD;
 const mysqlPort = process.env.MYSQL_PORT;
@@ -14,6 +15,7 @@ console.log(mysqlUser);
 
 const sequelize = new Sequelize({
   host: mysqlHost,
+  database: mysqlDatabase,
   username: mysqlUser,
   password: mysqlPassword,
   port: mysqlPort,

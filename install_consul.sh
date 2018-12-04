@@ -5,8 +5,9 @@
 # Used for setting up Consul Server inter-node encrpyted settings
 CONSUL_ENCRYPT="${consul_encrpyt}"
 CONSUL_DATACENTER="${consul_datacenter}"
-CONSUL_DOWNLOAD_PATH="/tmp/consul_${consul_version}_linux_amd64.zip"
-CONSUL_DOWNLOAD_URL="https://releases.hashicorp.com/consul/${consul_version}/consul_${consul_version}_linux_amd64.zip"
+CONSUL_VERSION="${consul_version}"
+CONSUL_DOWNLOAD_PATH="/tmp/consul_"$CONSUL_VERSION"_linux_amd64.zip"
+CONSUL_DOWNLOAD_URL="https://releases.hashicorp.com/consul/"$CONSUL_VERSION"/consul_"$CONSUL_VERSION"_linux_amd64.zip"
 
 
 # Used for getting cluster IP addresses for Consul bootstrapping/join
@@ -79,6 +80,9 @@ cat >/etc/consul.d/server.hcl <<EOF
 server = true
 bootstrap_expect = 3
 ui = true
+connect {
+  enabled = true
+}
 EOF
 
 systemctl enable consul

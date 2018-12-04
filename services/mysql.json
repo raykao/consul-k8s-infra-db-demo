@@ -1,0 +1,7 @@
+{"service": {"name": "mysql", "connect": { "sidecar_service": {}}, "tags": ["master"], "port": 3306}}
+
+{"service": {"name": "mongo", "connect": { "sidecar_service": {}}, "tags": ["master"], "port": 27017}}
+
+{"service": {"name": "mysql", "connect": { "sidecar_service": {}}, "tags": ["master"], "port": 3306, "check": {"args": ["/etc/consul.d/mysql-check.sh"], "interval": "10s"}}}
+
+{"service": {"name": "mysql", "connect": { "sidecar_service": {}}, "tags": ["master"], "port": 3306, "check": {"args": ["mysql", "-u", "root", "--protocol", "tcp", "-h", "localhost:3306", "-p"], "interval": "10s"}}}

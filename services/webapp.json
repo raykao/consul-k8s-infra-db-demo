@@ -1,0 +1,21 @@
+{
+  "service": {
+    "name": "webapp",
+    "port": 3000,
+    "connect": {
+      "sidecar_service": {
+        "proxy": {
+          "upstreams": [
+            {
+              "destination_type": "service",
+              "destination_name": "mysql",
+              "local_bind_address": "127.0.0.1",
+              "datacenter": "dc1",
+              "local_bind_port": 9191
+            }
+          ]
+        }
+      }
+    }
+  }
+}

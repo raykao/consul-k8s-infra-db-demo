@@ -9,6 +9,8 @@ Domains=~consul
 iptables -t nat -A OUTPUT -d localhost -p udp -m udp --dport 53 -j REDIRECT --to-ports 8600
 iptables -t nat -A OUTPUT -d localhost -p tcp -m tcp --dport 53 -j REDIRECT --to-ports 8600
 ```
+# restart systemd-resolver
+sudo service systemd-resolved restart
 
 
 echo '{"service": {"name": "web", "tags": ["node"], "port": 80}}' > ./web.json
@@ -58,3 +60,14 @@ echo '{"service": {"name": "mysql", "tags": ["master"], "port": 3306}}' > ./mysq
     }
   }
 }
+
+run envoy as a docker container
+docker run --rm -d --network host \
+  --name mysql-sidecar-proxy \
+  consul-envoy -sidecar-for mysql
+
+GRANT ALL ON *.* TO 'root'@'localhost';
+
+  GRANT ALL ON *.* TO 'root'@'%';
+
+  sudo ufw allow 21000:21255/udp

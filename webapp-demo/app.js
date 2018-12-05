@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const Mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 const MONGOHost = process.env.MONGO_HOST;
 const MONGODatabase = process.env.MONGO_DB;

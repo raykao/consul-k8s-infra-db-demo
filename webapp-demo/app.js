@@ -14,8 +14,7 @@ const MONGOPassword = process.env.MONGO_PASSWORD;
 const MONGOURI = `mongodb://${MONGOHost}:${MONGOPort}/${MONGODatabase}`;
 
 const MongooseOptions = {
-  user: MONGOUser,
-  pass: MONGOPassword,
+  useNewUrlParser: true,
 }
 
 const db = mongoose.connect(MONGOURI, MongooseOptions);

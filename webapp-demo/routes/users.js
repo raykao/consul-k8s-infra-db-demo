@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/seed', function(req, res, next){
-  var user = User.new({
+  var user = new User({
     firstname: "Ray",
     lastname: "Kao",
     email: "ray.kao@microsoft.com"

@@ -30,7 +30,11 @@ router.get('/seed', function(req, res, next){
       next(err)
     }
     else {
-      res.status(200).json(result);
+      message = {
+        hostname: os.hostname(),
+        result: result
+      }
+      res.status(200).json();
     }
   });
 });

@@ -7,10 +7,25 @@ const Mongoose = require('mongoose');
 
 const MONGOHost = process.env.MONGO_HOST;
 const MONGODatabase = process.env.MONGO_DB;
-const MONGOUser = process.env.MONGO_USER;
-const MONGOPassword = process.env.MONGO_PASSWORD;
 const MONGOPort = process.env.MONGO_PORT;
 
+const MONGOUser = process.env.MONGO_USER;
+const MONGOPassword = process.env.MONGO_PASSWORD;
+const MONGOURI = `mongodb://${MONGOHost}:${MONGOPort}/${MONGODatabase}`;
+
+const MongooseOptions = {
+  user: MONGOUser,
+  pass: MONGOPassword,
+}
+
+const db = mongoose.connect(MONGOURI, MongooseOptions);
+
+db.then(function(){
+  console.log("ready");
+},
+function(err){
+  console.log(err);
+});
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');

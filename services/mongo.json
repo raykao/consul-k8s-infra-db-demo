@@ -1,0 +1,1 @@
+{"service": {"name": "mongo", "connect": { "proxy": {}}, "tags": ["master"], "port": 27017}}

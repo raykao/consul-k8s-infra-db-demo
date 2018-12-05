@@ -25,7 +25,14 @@ router.get('/seed', function(req, res, next){
     email: "ray.kao@microsoft.com"
   });
 
-  res.status(200).json(user);
+  user.save(function(err, result){
+    if(err) {
+      next(err)
+    }
+    else {
+      res.status(200).json(result);
+    }
+  });
 });
 
 module.exports = router;

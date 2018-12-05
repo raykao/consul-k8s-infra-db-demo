@@ -26,7 +26,6 @@ router.get('/seed', function(req, res, next){
   });
 
   res.status(200).json(user);
-  next();
 });
 
 module.exports = router;

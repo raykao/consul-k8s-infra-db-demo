@@ -34,7 +34,8 @@ router.get('/seed', function(req, res, next){
         hostname: os.hostname(),
         result: result
       }
-      res.status(200).json();
+      
+      res.status(200).json(message);
     }
   });
 });

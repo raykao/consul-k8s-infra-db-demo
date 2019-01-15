@@ -1,3 +1,8 @@
+## helm install
+```
+helm install ./consul-helm-0.4.0 -n consul
+```
+
 - add to /etc/systemd/resolved.conf
 ```
 DNS=127.0.0.1

@@ -24,12 +24,8 @@ variable "prefix" {
   default = "rkconsul"
 }
 
-variable "subnet_space" {
-  default = "192.168.0.0"
-}
-
-variable "subnet_prefix" {
-  default = "28"
+variable "consul_server_subnet_address" {
+  default = "192.168.0.0/28"
 }
 
 variable "vm_size" {

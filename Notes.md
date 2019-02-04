@@ -76,3 +76,6 @@ GRANT ALL ON *.* TO 'root'@'localhost';
   GRANT ALL ON *.* TO 'root'@'%';
 
   sudo ufw allow 21000:21255/udp
+
+# Change to VMSS
+

@@ -13,12 +13,13 @@ resource "azurerm_virtual_network" "main" {
   resource_group_name = "${azurerm_resource_group.main.name}"
 }
 
-resource "azurerm_subnet" "default" {
-  name                 = "default-subnet"
+resource "azurerm_subnet" "consul_server" {
+  name                 = "consul-server-subnet"
   resource_group_name  = "${azurerm_resource_group.main.name}"
   virtual_network_name = "${azurerm_virtual_network.main.name}"
-  address_prefix       = "${var.subnet_space}/${var.subnet_prefix}"
+  address_prefix       = "${var.consul_server_subnet_address}"
 }
+
 
 resource "azurerm_network_interface" "main" {
   count	              = "${var.instance_count}"
@@ -28,7 +29,7 @@ resource "azurerm_network_interface" "main" {
 
   ip_configuration {
     name                          = "${var.prefix}${format("%03d", count.index + 1)}-ip"
-    subnet_id                     = "${azurerm_subnet.default.id}"
+    subnet_id                     = "${azurerm_subnet.consul_server.id}"
     private_ip_address_allocation = "dynamic"
     public_ip_address_id	        = "${element(azurerm_public_ip.main.*.id, count.index)}"
   }

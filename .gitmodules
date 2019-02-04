@@ -1,0 +1,3 @@
+[submodule "consl-helm"]
+	path = consl-helm
+	url = https://github.com/hashicorp/consul-helm

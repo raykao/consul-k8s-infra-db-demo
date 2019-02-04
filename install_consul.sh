@@ -49,7 +49,7 @@ ConditionFileNotEmpty=/etc/consul.d/consul.hcl
 [Service]
 User=consul
 Group=consul
-ExecStart=/usr/local/bin/consul agent -config-dir=/etc/consul.d/
+ExecStart=/bin/bash /etc/consul.d/start-consul.sh
 ExecReload=/usr/local/bin/consul reload
 KillMode=process
 Restart=on-failure
@@ -60,8 +60,20 @@ WantedBy=multi-user.target
 EOF
 
 mkdir --parents /etc/consul.d
-touch /etc/consul.d/consul.hcl
 chown --recursive consul:consul /etc/consul.d
+
+touch /etc/consul.d/start-consul.sh
+chmod 740 /etc/consul.d/start-consul.sh
+
+cat >/etc/consul.d/start-consul.sh <<EOF
+#!/usr/bin/env bash
+
+export CONSUL_BIND_ADDR=$(ifconfig eth0 | grep "inet " | awk '{ print $2 }')
+
+consul agent -config-dir=/etc/consul.d/ -bind=$CONSUL_BIND_ADDR
+EOF
+
+touch /etc/consul.d/consul.hcl
 chmod 640 /etc/consul.d/consul.hcl
 
 cat >/etc/consul.d/consul.hcl <<EOF
@@ -71,9 +83,7 @@ encrypt = "$CONSUL_ENCRYPT"
 retry_join = ["192.168.0.4", "192.168.0.5", "192.168.0.6"]
 EOF
 
-mkdir --parents /etc/consul.d
 touch /etc/consul.d/server.hcl
-chown --recursive consul:consul /etc/consul.d
 chmod 640 /etc/consul.d/server.hcl
 
 cat >/etc/consul.d/server.hcl <<EOF
